@@ -42,22 +42,23 @@
   },
   "scripts": {
     "build": "tsdown",
-    "format": "prettier \"**/*.{js,ts,tsx,md}\" --write"
+    "format": "oxfmt"
   },
   "peerDependencies": {
     "csstype": "^3.0.10"
   },
   "devDependencies": {
+    "@pretty-cozy/oxlint-config": "0.1.0",
     "csstype": "^3.0.10",
     "husky": "4.2.4",
     "lint-staged": "10.2.0",
-    "prettier": "2.0.5",
+    "oxfmt": "0.67.0",
     "tsdown": "0.23.0",
     "typescript": "^3.6.3"
   },
   "lint-staged": {
     "*.{js,ts,tsx,md}": [
-      "prettier --write"
+      "oxfmt --write"
     ]
   },
   "husky": {
