@@ -1,0 +1,17 @@
+ignoreScripts: true
+blockExoticSubdeps: true
+preferFrozenLockfile: true
+savePrefix: ""
+
+minimumReleaseAge: 4320 # >=3 days
+
+# trustPolicy: no-downgrade
+
+packages:
+- ./
+- ./global
+- ./macro
+- ./prefixer
+- ./packages/babel-plugin-transform-goober
+- ./packages/gatsby-plugin-goober
+- ./should-forward-prop
