@@ -15,15 +15,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf ./dist && microbundle --entry src/index.js --name gooberPrefixer --no-sourcemap --generateTypes false",
-    "test": "jest"
+    "build": "rm -rf ./dist && microbundle --entry src/index.js --name gooberPrefixer --no-sourcemap --generateTypes false"
   },
   "devDependencies": {
     "microbundle": "^0.14.2",
     "@babel/plugin-transform-react-jsx": "^7.7.0",
     "@babel/preset-env": "^7.3.1",
-    "babel-jest": "^24.1.0",
-    "jest": "^24.1.0",
     "style-vendorizer": "^2.0.0"
   },
   "keywords": [

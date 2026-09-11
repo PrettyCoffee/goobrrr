@@ -12,8 +12,7 @@
   "types": "./should-forward-prop.d.ts",
   "type": "module",
   "scripts": {
-    "build": "rm -rf dist && microbundle --entry src/index.js --name gooberForwardProp --no-sourcemap --generateTypes false",
-    "test": "jest --setupFiles ./jest.setup.js"
+    "build": "rm -rf dist && microbundle --entry src/index.js --name gooberForwardProp --no-sourcemap --generateTypes false"
   },
   "repository": {
     "type": "git",
@@ -32,10 +31,8 @@
   },
   "devDependencies": {
     "microbundle": "^0.14.2",
-    "jest": "^24.1.0",
     "preact": "^10.5.6",
     "@babel/plugin-transform-react-jsx": "^7.7.0",
-    "@babel/preset-env": "^7.3.1",
-    "babel-jest": "^24.1.0"
+    "@babel/preset-env": "^7.3.1"
   }
 }

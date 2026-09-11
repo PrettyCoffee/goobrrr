@@ -61,21 +61,12 @@
     }
   },
   "scripts": {
-    "test": "pnpm run test-ts && pnpm run test-unit -- --ci --coverage && pnpm run build && pnpm run test-perf",
-    "test-perf": "NODE_ENV=production node benchmarks/perf.cjs",
-    "test-perf-hash": "NODE_ENV=production node benchmarks/perf-hash.cjs",
-    "test-unit-core": "jest --setupFiles ./tests/setup.js --roots ./src packages",
-    "test-unit": "pnpm run test-unit-core && pnpm run test-addon-global && pnpm run test-addon-prefixer",
-    "test-addon-global": "cd global && pnpm run test",
-    "test-addon-prefixer": "cd prefixer && pnpm run test",
-    "test-ts": "tsc -p ts-tests",
     "clean": "rimraf dist",
-    "size-check": "filesize",
     "build": "pnpm run build:core && pnpm run build:prefixer && pnpm run build:global && pnpm run build:should-forward-prop",
     "build:prefixer": "cd ./prefixer && pnpm run build",
     "build:global": "cd ./global && pnpm run build",
     "build:should-forward-prop": "cd ./should-forward-prop && pnpm run build",
-    "build:core": "pnpm run clean && pnpm run build:dist && pnpm run size-check",
+    "build:core": "pnpm run clean && pnpm run build:dist",
     "build:lib": "microbundle --entry src/index.js --name goober --no-sourcemap --generateTypes false",
     "build:dist": "pnpm run build:lib -- --output dist",
     "build:debug": "pnpm run build:lib -- --output debug --no-compress",
@@ -88,8 +79,6 @@
     "css-in-js",
     "goober",
     "styled",
-    "emotion",
-    "styled-components",
     "javascript",
     "react",
     "preact"
@@ -101,19 +90,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@ampproject/filesize": "^4.0.0",
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-react-jsx": "^7.7.0",
     "@babel/preset-env": "^7.3.1",
-    "@emotion/core": "^11.0.0",
-    "@emotion/styled": "^11.0.0",
-    "@emotion/react": "^11.1.4",
     "@types/react": "^16.9.34",
-    "babel-jest": "^24.1.0",
     "benchmark": "^2.1.4",
     "csstype": "^3.0.10",
     "husky": "4.2.4",
-    "jest": "^24.1.0",
     "lint-staged": "10.2.0",
     "microbundle": "^0.15.0",
     "preact": "^10.0.0",
@@ -121,7 +104,6 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "rimraf": "3.0.2",
-    "styled-components": "^5.2.1",
     "typescript": "^3.6.3",
     "wmr": "^3.7.2"
   },
@@ -129,14 +111,6 @@
     "csstype": "^3.0.10"
   },
   "typings": "./goober.d.ts",
-  "filesize": {
-    "./dist/goober.modern.js": {
-      "gzip": "1300B"
-    },
-    "./dist/goober.cjs": {
-      "gzip": "1300B"
-    }
-  },
   "lint-staged": {
     "*.{js,ts,tsx,md}": [
       "prettier --write"
