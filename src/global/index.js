@@ -1,4 +1,4 @@
-import { css, styled } from 'goober';
+import { css, styled } from '../index';
 
 /**
  * CSS Global function to declare global styles
