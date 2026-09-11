@@ -42,28 +42,24 @@
   },
   "scripts": {
     "build": "tsdown",
-    "format": "oxfmt"
+    "format": "oxfmt --write",
+    "prepare": "husky"
   },
   "peerDependencies": {
     "csstype": "^3.0.10"
   },
   "devDependencies": {
     "@pretty-cozy/oxlint-config": "0.1.0",
-    "csstype": "^3.0.10",
-    "husky": "4.2.4",
-    "lint-staged": "10.2.0",
+    "csstype": "3.2.3",
+    "husky": "9.1.7",
+    "lint-staged": "17.5.0",
     "oxfmt": "0.67.0",
     "tsdown": "0.23.0",
-    "typescript": "^3.6.3"
+    "typescript": "3.9.10"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,md}": [
+    "*.{js,jsx,ts,tsx,md,json,yaml}": [
       "oxfmt --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

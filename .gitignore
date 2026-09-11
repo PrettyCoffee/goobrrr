@@ -1,7 +1,3 @@
 node_modules
 dist
-debug
-sandbox
-coverage
-.cache
-benchmarks/results
+.husky/_

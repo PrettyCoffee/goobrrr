@@ -3,5 +3,5 @@ import { defineConfig } from "oxfmt"
 
 export default defineConfig({
   ...cozy.oxfmt,
-  ignorePatterns: ["dist"],
+  ignorePatterns: ["dist", "pnpm-lock.yaml"],
 })

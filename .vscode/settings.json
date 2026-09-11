@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "oxc.enable": true,
+  "oxc.fixKind": "safe_fix",
+  "editor.codeActionsOnSave": {
+    "source.format.oxc": "always"
+  },
+  "oxc.enable.oxlint": true
+}
