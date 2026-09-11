@@ -12,16 +12,10 @@
   "type": "module",
   "files": [
     "src",
-    "macro",
     "global/dist",
     "global/src",
     "global/package.json",
     "global/global.d.ts",
-    "prefixer/dist",
-    "prefixer/src",
-    "prefixer/package.json",
-    "prefixer/autoprefixer.d.ts",
-    "prefixer/README.md",
     "should-forward-prop/dist",
     "should-forward-prop/src",
     "should-forward-prop/package.json",
@@ -40,18 +34,11 @@
       "umd": "./dist/goober.umd.js",
       "types": "./goober.d.ts"
     },
-    "./macro": "./macro/index.js",
     "./global": {
       "import": "./global/dist/goober-global.modern.js",
       "require": "./global/dist/goober-global.cjs",
       "umd": "./global/dist/goober-global.umd.js",
       "types": "./global/global.d.ts"
-    },
-    "./prefixer": {
-      "import": "./prefixer/dist/goober-autoprefixer.modern.js",
-      "require": "./prefixer/dist/goober-autoprefixer.cjs",
-      "umd": "./prefixer/dist/goober-autoprefixer.umd.js",
-      "types": "./prefixer/autoprefixer.d.ts"
     },
     "./should-forward-prop": {
       "import": "./should-forward-prop/dist/goober-should-forward-prop.modern.js",
@@ -62,8 +49,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "pnpm run build:core && pnpm run build:prefixer && pnpm run build:global && pnpm run build:should-forward-prop",
-    "build:prefixer": "cd ./prefixer && pnpm run build",
+    "build": "pnpm run build:core && pnpm run build:global && pnpm run build:should-forward-prop",
     "build:global": "cd ./global && pnpm run build",
     "build:should-forward-prop": "cd ./should-forward-prop && pnpm run build",
     "build:core": "pnpm run clean && pnpm run build:dist",

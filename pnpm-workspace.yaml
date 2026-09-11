@@ -10,8 +10,4 @@ minimumReleaseAge: 4320 # >=3 days
 packages:
 - ./
 - ./global
-- ./macro
-- ./prefixer
-- ./packages/babel-plugin-transform-goober
-- ./packages/gatsby-plugin-goober
 - ./should-forward-prop
