@@ -1,0 +1,100 @@
+import { describe, it, expect } from "vitest"
+
+import { astish } from "./astish"
+
+type TestCase = {
+  name: string
+  css: string
+  ast: object
+}
+
+const cases: TestCase[] = [
+  { name: "empty input", css: "", ast: {} },
+  { name: "single declaration", css: "color: red;", ast: { color: "red" } },
+  {
+    name: "multiple declarations",
+    css: "color:red;background:blue;",
+    ast: { color: "red", background: "blue" },
+  },
+  {
+    name: "comments and extra whitespace",
+    css: "/* comment */ color: red;  background: blue;",
+    ast: { color: "red", background: "blue" },
+  },
+  {
+    name: "multiline value",
+    css: "background: linear-gradient(\n      red,\n      blue\n    );",
+    ast: { background: "linear-gradient( red, blue )" },
+  },
+  {
+    name: "custom property",
+    css: "--accent-color: #f00;",
+    ast: { "--accent-color": "#f00" },
+  },
+  {
+    name: "class selector",
+    css: ".red-text { color: red; }",
+    ast: { ".red-text": { color: "red" } },
+  },
+  {
+    name: "pseudo selector",
+    css: "button:hover { color: red; }",
+    ast: { "button:hover": { color: "red" } },
+  },
+  {
+    name: "nested selector",
+    css: "button.key { &:hover { color: red; } }",
+    ast: { "button.key": { "&:hover": { color: "red" } } },
+  },
+  {
+    name: "multiple nested selectors",
+    css: ".button { color: red; &:hover { color: blue; } &:focus { outline: 0; } }",
+    ast: {
+      ".button": {
+        color: "red",
+        "&:hover": { color: "blue" },
+        "&:focus": { outline: "0" },
+      },
+    },
+  },
+  {
+    name: "media query",
+    css: "@media (max-width: 1024px) { button { color: red; } }",
+    ast: {
+      "@media (max-width: 1024px)": {
+        button: {
+          color: "red",
+        },
+      },
+    },
+  },
+  {
+    name: "import rule",
+    css: "@import url(example.css);",
+    ast: { "@import": "url(example.css)" },
+  },
+  {
+    name: "font face rule",
+    css: "@font-face { font-family: Example; src: url(example.woff2); }",
+    ast: {
+      "@font-face": { "font-family": "Example", src: "url(example.woff2)" },
+    },
+  },
+]
+
+describe("Test astish", () => {
+  it.each(cases)("parses $name", ({ css, ast }) => {
+    expect(astish(css)).toStrictEqual(ast)
+  })
+
+  it.skip("raises error for rules with bad syntax", () => {
+    const css = `
+      color;red;
+      background blue;
+      .button [
+        color: blue;
+      ]
+    `
+    expect(astish(css)).toStrictEqual({})
+  })
+})

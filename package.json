@@ -45,6 +45,9 @@
     "dev": "pnpm run dev:lib & pnpm run dev:demo",
     "dev:lib": "pnpm run build --watch",
     "dev:demo": "cd demo && pnpm run dev",
+    "test": "vitest run",
+    "test:coverage": "pnpm run test --coverage",
+    "test:watch": "vitest watch",
     "format": "oxfmt --write",
     "prepare": "husky"
   },
@@ -53,12 +56,15 @@
   },
   "devDependencies": {
     "@pretty-cozy/oxlint-config": "0.1.0",
+    "@vitest/coverage-v8": "5.0.0",
     "csstype": "3.2.3",
+    "happy-dom": "20.14.0",
     "husky": "9.1.7",
     "lint-staged": "17.5.0",
     "oxfmt": "0.67.0",
     "tsdown": "0.23.0",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "vitest": "5.0.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,html,md,json,yaml}": [

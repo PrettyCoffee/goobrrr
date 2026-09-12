@@ -16,8 +16,8 @@ export let extractCss = target => {
  *
  * @param {String} css
  * @param {Object} sheet
- * @param {Boolean} append
- * @param {String | null} cssToReplace
+ * @param {Boolean} [append]
+ * @param {String | null} [cssToReplace]
  */
 export let update = (css, sheet, append, cssToReplace) => {
   cssToReplace

@@ -26,11 +26,11 @@ let stringify = data => {
 /**
  * Generates the needed className.
  *
- * @param {String | Object} compiled
- * @param {Object} sheet StyleSheet target.
- * @param {Object} global Global flag.
- * @param {Boolean} append Append or not.
- * @param {Boolean} keyframes Keyframes mode. The input is the keyframes body
+ * @param {string | object} compiled
+ * @param {object} sheet StyleSheet target.
+ * @param {boolean} [global] Global flag.
+ * @param {boolean} [append] Append or not.
+ * @param {boolean} [keyframes] Keyframes mode. The input is the keyframes body
  *   that needs to be wrapped.
  *
  * @returns {String}

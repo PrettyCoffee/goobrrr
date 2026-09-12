@@ -3,8 +3,9 @@ import { parse } from "./parse"
 /**
  * Can parse a compiled string, from a tagged template.
  *
- * @param {String} value
- * @param {Object} [props]
+ * @param {string[]} str
+ * @param {(string | (data: any) => string | object | false)[]} [defs]
+ * @param {object} [data]
  */
 export let compile = (str, defs, data) => {
   return str.reduce((out, next, i) => {
