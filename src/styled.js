@@ -1,10 +1,10 @@
-import { parse } from "./core/parse"
+import { parser } from "./core/parser"
 import { css } from "./css"
 
 let h, useTheme, fwdProp
 function setup(pragma, prefix, theme, forwardProps) {
   // This one needs to stay in here, so we won't have cyclic dependencies
-  parse.p = prefix
+  parser.p = prefix
 
   // These are scope to this context
   h = pragma

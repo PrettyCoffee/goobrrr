@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest"
 
-import { astish } from "./astish"
+import { toObject } from "./toObject"
 
 type TestCase = {
   name: string
@@ -82,9 +82,9 @@ const cases: TestCase[] = [
   },
 ]
 
-describe("Test astish", () => {
+describe("Test toObject", () => {
   it.each(cases)("parses $name", ({ css, ast }) => {
-    expect(astish(css)).toStrictEqual(ast)
+    expect(toObject(css)).toStrictEqual(ast)
   })
 
   it.skip("raises error for rules with bad syntax", () => {
@@ -95,6 +95,6 @@ describe("Test astish", () => {
         color: blue;
       ]
     `
-    expect(astish(css)).toStrictEqual({})
+    expect(toObject(css)).toStrictEqual({})
   })
 })

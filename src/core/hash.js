@@ -1,5 +1,4 @@
-import { astish } from "./astish"
-import { parse } from "./parse"
+import { parser } from "./parser"
 import { toHash } from "./to-hash"
 import { update } from "./update"
 
@@ -47,13 +46,13 @@ export let hash = (compiled, sheet, global, append, keyframes) => {
   // If there's no entry for the current className
   if (!cache[className]) {
     // Build the _ast_-ish structure if needed
-    let ast = stringifiedCompiled !== compiled ? compiled : astish(compiled)
+    let ast =
+      stringifiedCompiled !== compiled ? compiled : parser.toObject(compiled)
 
     // Parse it
-    cache[className] = parse(
-      // For keyframes
-      keyframes ? { ["@keyframes " + className]: ast } : ast,
-      global ? "" : "." + className,
+    cache[className] = parser.toString(
+      ast,
+      global ? "" : keyframes ? "@keyframes " + className : "." + className,
     )
   }
 

@@ -1,4 +1,4 @@
-import { parse } from "./parse"
+import { parser } from "./parser"
 
 /**
  * Can parse a compiled string, from a tagged template.
@@ -29,7 +29,7 @@ export let compile = (str, defs, data) => {
       } else if (res && typeof res == "object") {
         // If `res` it's an object, we're either dealing with a vnode
         // or an object returned from a function interpolation
-        tail = res.props ? "" : parse(res, "")
+        tail = res.props ? "" : parser.toString(res, "")
       } else {
         // Regular value returned. Can be falsy as well.
         // Here we check if this is strictly a boolean with false value
