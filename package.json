@@ -1,6 +1,6 @@
 {
-  "name": "goober",
-  "version": "2.1.19",
+  "name": "goobrrr",
+  "version": "0.1.0",
   "description": "A less than 1KB css-in-js solution",
   "keywords": [
     "css-in-js",
@@ -42,6 +42,9 @@
   },
   "scripts": {
     "build": "tsdown",
+    "dev": "pnpm run dev:lib & pnpm run dev:demo",
+    "dev:lib": "pnpm run build --watch",
+    "dev:demo": "cd demo && pnpm run dev",
     "format": "oxfmt --write",
     "prepare": "husky"
   },
@@ -58,7 +61,7 @@
     "typescript": "7.0.2"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,json,yaml}": [
+    "*.{js,jsx,ts,tsx,html,md,json,yaml}": [
       "oxfmt --write"
     ]
   }

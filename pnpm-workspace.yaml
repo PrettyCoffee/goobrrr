@@ -5,3 +5,8 @@ savePrefix: ""
 minimumReleaseAge: 4320 # >=3 days
 
 trustPolicy: no-downgrade
+
+ignoreWorkspaceRootCheck: true
+packages:
+  - ./
+  - demo
