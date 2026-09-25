@@ -1,7 +1,7 @@
 import { parser, StyleNode } from "./parser"
 
 type Conditional<T> = T | false | null | undefined
-type TemplateValue = Conditional<StyleNode | string | number>
+export type TemplateValue = Conditional<StyleNode | string | number>
 
 const getValue = (value: TemplateValue) => {
   if (typeof value === "object" && value) value = parser.toString(value)
@@ -10,5 +10,8 @@ const getValue = (value: TemplateValue) => {
 }
 
 /** Can parse a compiled string, from a tagged template. */
-export const compile = (strings: string[], values: TemplateValue[]) =>
+export const compile = (
+  strings: TemplateStringsArray,
+  values: TemplateValue[],
+) =>
   strings.flatMap((string, index) => [string, getValue(values[index])]).join("")

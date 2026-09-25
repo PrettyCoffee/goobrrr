@@ -22,11 +22,16 @@ function styled(tag, forwardRef) {
   let _ctx = this || {}
 
   return function wrapper() {
-    let _args = arguments
+    let [arg, ...rest] = arguments
 
     function Styled(props, ref) {
       // Grab a shallow copy of the props
       let _props = Object.assign({}, props)
+      let strings = Array.isArray(arg)
+        ? arg
+        : typeof arg === "function"
+          ? [arg(_props)]
+          : [arg]
 
       // Keep a local reference to the previous className
       let _previousClassName = _props.className || Styled.className
@@ -36,11 +41,11 @@ function styled(tag, forwardRef) {
 
       // Set a flag if the current components had a previous className
       // similar to goober. This is the append/prepend flag
-      _ctx.o = /go\d/.test(_previousClassName)
+      _ctx.append = /go\d/.test(_previousClassName)
 
       _props.className =
         // Define the new className
-        css.apply(_ctx, _args) +
+        css.apply(_ctx, [strings, ...rest]) +
         (_previousClassName ? " " + _previousClassName : "")
 
       // If the forwardRef fun is defined we have the ref

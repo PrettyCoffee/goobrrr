@@ -22,7 +22,7 @@ const createClassName = (compiled: StyleNode | string) => {
   return (cache[identifier] ??= toHash(identifier))
 }
 
-type InjectionType = "class" | "global" | "keyframes"
+export type InjectionType = "class" | "global" | "keyframes"
 
 const createStyles = (
   className: string,

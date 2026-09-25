@@ -5,7 +5,7 @@ import { css, styled } from "../index"
  *
  * @type {Function}
  */
-export let glob = css.bind({ g: 1 })
+export let glob = css.bind({ type: "global" })
 
 /**
  * Creates the global styles component to be used as part of your tree.
@@ -13,7 +13,7 @@ export let glob = css.bind({ g: 1 })
  * @returns {Function}
  */
 export function createGlobalStyles() {
-  const fn = styled.call({ g: 1 }, "div").apply(null, arguments)
+  const fn = styled.call({ type: "global" }, "div").apply(null, arguments)
 
   // Render hook: call the styled fn for side-effects, return null vnode.
   return props => (fn(props), null)
