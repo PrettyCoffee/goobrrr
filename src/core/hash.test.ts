@@ -25,13 +25,24 @@ describe("Test hash", () => {
       { from: { opacity: 0 }, to: { opacity: 1 } },
       sheet,
       false,
-      false,
-      true,
+      "keyframes",
     )
 
     expect(sheet.data).toBe(
       `@keyframes ${className}{from{opacity:0;}to{opacity:1;}}`,
     )
+  })
+
+  it("writes global styles without a selector", () => {
+    const sheet = { data: "" }
+    hash(
+      { className: { color: "red", opacity: 1, rotate: "45deg" } },
+      sheet,
+      false,
+      "global",
+    )
+
+    expect(sheet.data).toBe(`className{color:red;opacity:1;rotate:45deg;}`)
   })
 
   it("does not duplicate cached CSS", () => {

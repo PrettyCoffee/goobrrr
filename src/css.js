@@ -15,7 +15,7 @@ function css(val) {
     _val.unshift
       ? _val.raw
         ? // Tagged templates
-          compile(_val, [].slice.call(arguments, 1), ctx.p)
+          compile(_val, [].slice.call(arguments, 1))
         : // Regular arrays
           _val.reduce(
             (o, i) => Object.assign(o, i && i.call ? i(ctx.p) : i),
@@ -23,9 +23,8 @@ function css(val) {
           )
       : _val,
     getSheet(ctx.target),
-    ctx.g,
     ctx.o,
-    ctx.k,
+    ctx.g ? "global" : ctx.k ? "keyframes" : "class",
   )
 }
 

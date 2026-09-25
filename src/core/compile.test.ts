@@ -3,25 +3,15 @@ import { describe, it, expect } from "vitest"
 import { compile } from "./compile"
 
 describe("Test compile", () => {
-  it("interpolates regular values", () => {
-    expect(compile(["color: ", ";"], ["red"])).toBe("color: red;")
-  })
-
-  it("evaluates functions with the provided data", () => {
-    expect(
-      compile(["color: ", ";"], [props => props.color], { color: "blue" }),
-    ).toBe("color: blue;")
-  })
-
-  it("turns class names into selectors", () => {
-    expect(compile(["", ""], [() => "go123"])).toBe(".go123")
-  })
-
-  it("parses object interpolations into declarations", () => {
-    expect(compile(["", ""], [() => ({ color: "red" })])).toBe("color:red;")
-  })
-
-  it("omits false interpolations", () => {
-    expect(compile(["a", "b"], [() => false])).toBe("ab")
+  it.each`
+    name           | strings                      | values                | result
+    ${"string"}    | ${["color: ", ";"]}          | ${["red"]}            | ${"color: red;"}
+    ${"object"}    | ${["background: blue;", ""]} | ${[{ color: "red" }]} | ${"background: blue;color:red;"}
+    ${"number"}    | ${["opacity:", ";"]}         | ${[0.5]}              | ${"opacity:0.5;"}
+    ${"false"}     | ${["a", "b"]}                | ${[false]}            | ${"ab"}
+    ${"null"}      | ${["a", "b"]}                | ${[null]}             | ${"ab"}
+    ${"undefined"} | ${["a", "b"]}                | ${[undefined]}        | ${"ab"}
+  `("interpolates $name values", ({ strings, values, result }) => {
+    expect(compile(strings, values)).toBe(result)
   })
 })
