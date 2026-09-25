@@ -1,26 +1,31 @@
-import { compile, TemplateValue } from "./core/compile"
-import { getSheet } from "./core/get-sheet"
-import { hash, InjectionType } from "./core/hash"
+import {
+  joinCssTemplate,
+  type CssTemplate,
+} from "./core/joinCssTemplate"
+import { parser, type StyleNode } from "./core/parser"
+import { Styles } from "./core/styles"
 
-interface Context {
-  type?: InjectionType
-  append?: boolean
-}
+const isTemplate = (
+  value: TemplateStringsArray | string[] | StyleNode,
+): value is TemplateStringsArray | string[] => Array.isArray(value)
 
-/** Create a CSS class in js. */
-export function css(
-  this: Context,
-  strings: TemplateStringsArray,
-  ...values: TemplateValue[]
-) {
-  let ctx = this || {}
-  const cssString = compile(strings, values)
+/** Create styles, inject them into the DOM, and generate a css class. */
+export function css(styles: StyleNode): Styles
+export function css(...args: CssTemplate["Args"]): Styles
+export function css(...args: [StyleNode] | CssTemplate["Args"]) {
+  const [styles, ...values] = args
 
-  return hash(cssString, getSheet(), ctx.append, ctx.type)
+  if (isTemplate(styles)) {
+    return new Styles(parser.toObject(joinCssTemplate(styles, ...values)))
+  }
+  return new Styles(styles)
 }
 
 /** Declare global styles. */
-export const glob = css.bind({ type: "global" })
+export const glob = (...args: CssTemplate["Args"]) => {
+  css(...args).withConfig({ type: "global" }).class
+}
 
 /** Keyframes function for defining animations. */
-export const keyframes = css.bind({ type: "keyframes" })
+export const keyframes = (...args: CssTemplate["Args"]) =>
+  css(...args).withConfig({ type: "keyframes" }).class

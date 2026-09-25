@@ -5,7 +5,9 @@ import { css, styled } from "../index"
  *
  * @type {Function}
  */
-export let glob = css.bind({ type: "global" })
+export const glob = (...args) => {
+  css(...args).withConfig({ type: "global" }).class
+}
 
 /**
  * Creates the global styles component to be used as part of your tree.

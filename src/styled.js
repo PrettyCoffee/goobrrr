@@ -19,7 +19,7 @@ function setup(pragma, prefix, theme, forwardProps) {
  * @param {function} forwardRef
  */
 function styled(tag, forwardRef) {
-  let _ctx = this || {}
+  const type = this?.type ?? "class"
 
   return function wrapper() {
     let [arg, ...rest] = arguments
@@ -36,17 +36,17 @@ function styled(tag, forwardRef) {
       // Keep a local reference to the previous className
       let _previousClassName = _props.className || Styled.className
 
-      // _ctx.p: is the props sent to the context
-      _ctx.p = Object.assign({ theme: useTheme && useTheme() }, _props)
-
       // Set a flag if the current components had a previous className
       // similar to goober. This is the append/prepend flag
-      _ctx.append = /go\d/.test(_previousClassName)
+      const append = /go\d/.test(_previousClassName)
+
+      const className = css([strings, ...rest]).withConfig({
+        type,
+        append,
+      }).class
 
       _props.className =
-        // Define the new className
-        css.apply(_ctx, [strings, ...rest]) +
-        (_previousClassName ? " " + _previousClassName : "")
+        className + (_previousClassName ? " " + _previousClassName : "")
 
       // If the forwardRef fun is defined we have the ref
       if (forwardRef) {
