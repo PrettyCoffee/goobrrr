@@ -1,7 +1,4 @@
-import {
-  joinCssTemplate,
-  type CssTemplate,
-} from "./core/joinCssTemplate"
+import { joinCssTemplate, type CssTemplate } from "./core/joinCssTemplate"
 import { parser, type StyleNode } from "./core/parser"
 import { Styles } from "./core/styles"
 
